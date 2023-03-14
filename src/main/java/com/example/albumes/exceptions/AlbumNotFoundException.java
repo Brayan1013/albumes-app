@@ -6,3 +6,4 @@ public class AlbumNotFoundException extends RuntimeException {
         super(message);
     }
 }
+

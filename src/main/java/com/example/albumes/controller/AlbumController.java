@@ -27,5 +27,4 @@ public class AlbumController {
         Album album = albumService.getAlbum(id);
         return ResponseEntity.status(HttpStatus.FOUND).body(album);
     }
-
 }

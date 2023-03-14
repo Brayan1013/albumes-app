@@ -1,3 +1,4 @@
+
 package com.example.albumes.exceptions;
 
 import lombok.extern.log4j.Log4j2;
