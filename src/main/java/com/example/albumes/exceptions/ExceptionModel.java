@@ -1,3 +1,4 @@
+
 package com.example.albumes.exceptions;
 
 import lombok.AllArgsConstructor;
@@ -14,3 +15,4 @@ public class ExceptionModel {
     private String message;
     private HttpStatus httpStatus;
 }
+

@@ -7,7 +7,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.UUID;
 
 @RestController
 @AllArgsConstructor
@@ -18,14 +17,13 @@ public class AlbumController {
 
     @PostMapping("/album")
     public ResponseEntity<?> saveAlbum(@RequestBody Album album){
-        UUID uuid = albumService.saveAlbum(album);
+        String uuid = albumService.saveAlbum(album);
         return ResponseEntity.status(HttpStatus.CREATED).body(uuid);
     }
 
     @GetMapping("/album/{id}")
-    public ResponseEntity<Album> getAlbumById(@PathVariable UUID id){
+    public ResponseEntity<Album> getAlbumById(@PathVariable String id){
         Album album = albumService.getAlbum(id);
         return ResponseEntity.status(HttpStatus.FOUND).body(album);
     }
-
 }

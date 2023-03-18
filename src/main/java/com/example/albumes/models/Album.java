@@ -1,16 +1,13 @@
 package com.example.albumes.models;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.Data;
 import lombok.Builder;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.GenericGenerator;
 
-import javax.persistence.Entity;
-import javax.persistence.Column;
-import javax.persistence.Id;
-import javax.persistence.Table;
-import javax.persistence.GeneratedValue;
+import javax.persistence.*;
 import java.util.UUID;
 
 @Entity
@@ -22,16 +19,13 @@ import java.util.UUID;
 public class Album {
 
     @Id
-    @GeneratedValue(generator = "UUID")
-    @GenericGenerator(
-            name = "UUID",
-            strategy = "org.hibernate.id.UUIDGenerator"
-    )
-    private UUID id;
+    private String id;
     @Column(name = "NAME_ALBUM")
     private String name;
-    @Column(name = "ARTIST")
-    private String artist;
     @Column(name = "LINK_PICTURE")
     private String linkPicture;
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "ARTIST_ID", nullable = false)
+    @JsonBackReference
+    private Artist artist;
 }
