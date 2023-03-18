@@ -17,14 +17,14 @@ public class ArtistController {
     private final ArtistService artistService;
 
     @GetMapping("/artist/{id}")
-    public ResponseEntity<?> getArtistById(@PathVariable UUID id){
+    public ResponseEntity<?> getArtistById(@PathVariable String id){
         Artist artist = artistService.getArtist(id);
         return ResponseEntity.status(HttpStatus.FOUND).body(artist);
     }
 
     @PostMapping("/artist")
     public ResponseEntity<?> saveBeneficiary(@RequestBody Artist artist){
-        UUID uuid = artistService.saveArtist(artist);
+        String uuid = artistService.saveArtist(artist);
         return ResponseEntity.status(HttpStatus.CREATED).body(uuid);
     }
 }

@@ -6,6 +6,6 @@ import java.util.UUID;
 
 public interface ArtistService {
 
-    Artist getArtist(UUID id);
-    UUID saveArtist(Artist artist);
+    Artist getArtist(String id);
+    String saveArtist(Artist artist);
 }

@@ -19,12 +19,7 @@ import java.util.UUID;
 public class Album {
 
     @Id
-    @GeneratedValue(generator = "UUID")
-    @GenericGenerator(
-            name = "UUID",
-            strategy = "org.hibernate.id.UUIDGenerator"
-    )
-    private UUID id;
+    private String id;
     @Column(name = "NAME_ALBUM")
     private String name;
     @Column(name = "LINK_PICTURE")

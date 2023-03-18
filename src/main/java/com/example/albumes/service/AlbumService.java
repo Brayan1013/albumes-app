@@ -7,6 +7,6 @@ import java.util.UUID;
 
 public interface AlbumService {
 
-    Album getAlbum(UUID id);
-    UUID saveAlbum(Album album);
+    Album getAlbum(String id);
+    String saveAlbum(Album album);
 }

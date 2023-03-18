@@ -20,17 +20,18 @@ public class AlbumServiceImpl implements AlbumService{
     private final ArtistService artistService;
 
     @Override
-    public Album getAlbum(UUID id) {
+    public Album getAlbum(String id) {
         return albumRepository.findById(id)
                 .orElseThrow(() ->
                         new AlbumNotFoundException(String.format("The album with the id: %s was not found", id)));
     }
 
     @Override
-    public UUID saveAlbum(Album album) {
-        UUID artistId = album.getArtist().getId();
+    public String saveAlbum(Album album) {
+        String artistId = album.getArtist().getId();
         Artist artist = artistService.getArtist(artistId);
         album.setArtist(artist);
+        album.setId(UUID.randomUUID().toString());
         Album save = albumRepository.save(album);
         return save.getId();
     }

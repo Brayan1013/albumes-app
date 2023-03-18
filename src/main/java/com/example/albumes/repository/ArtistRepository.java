@@ -1,9 +1,9 @@
 package com.example.albumes.repository;
 
 import com.example.albumes.models.Artist;
-import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.repository.CrudRepository;
 
-import java.util.UUID;
 
-public interface ArtistRepository extends JpaRepository<Artist, UUID> {
+public interface ArtistRepository extends CrudRepository<Artist, String> {
+
 }

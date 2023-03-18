@@ -21,12 +21,8 @@ import java.util.UUID;
 @Builder
 public class Artist {
     @Id
-    @GeneratedValue(generator = "UUID")
-    @GenericGenerator(
-            name = "UUID",
-            strategy = "org.hibernate.id.UUIDGenerator"
-    )
-    private UUID id;
+    @Column(name = "ID")
+    private String id;
     @Column(name = "NAME_ARTIST")
     private String nameArtist;
     @Column(name = "CREATION_DATE")

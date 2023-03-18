@@ -1,5 +1,6 @@
 package com.example.albumes.service;
 
+import com.example.albumes.exceptions.ArtistNotFound;
 import com.example.albumes.models.Artist;
 import com.example.albumes.repository.ArtistRepository;
 import lombok.AllArgsConstructor;
@@ -12,15 +13,24 @@ import java.util.UUID;
 public class ArtistServiceImpl implements ArtistService {
 
     private final ArtistRepository artistRepository;
+    private final KafkaProducerService kafkaProducerService;
 
     @Override
-    public Artist getArtist(UUID id) {
-        return artistRepository.findById(id)
-                .orElseThrow(() -> new IllegalArgumentException("ERROR"));
+    public Artist getArtist(String id) {
+        String messageError = String.format("The artist with the id: %s was not found", id);
+        Artist artist = artistRepository.findById(id)
+                .orElseThrow(() -> {
+                    kafkaProducerService.send(String.format("The artist with the id: %s was not found", id));
+                    return new ArtistNotFound(messageError);
+                });
+        kafkaProducerService.send(String.format("The artist with the id: %s was get", artist.getId()));
+        return artist;
     }
 
     @Override
-    public UUID saveArtist(Artist artist) {
+    public String saveArtist(Artist artist) {
+        artist.setId(UUID.randomUUID().toString());
+        artistRepository.save(artist);
         return artistRepository.save(artist).getId();
     }
 }
